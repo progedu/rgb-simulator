@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RGBシミュレーター</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <style>
+      .color-legend-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px;
+      }
+      .color-legend {
+        background: white;
+        padding: 10px;
+        font-weight: bold;
+      }
+      input[type="text"] {
+        width: 2.5em;
+      }
+      .color-slider-wrapper {
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="container mt-5">
+      <h2>RGBシミュレーター</h2>
+      <div class="color-slider-wrapper">
+        <label style="color: red"
+          >Red: <input type="text" v-model="colorValues.red" /></label
+        ><input
+          class="form-range"
+          name="red"
+          id="red"
+          type="range"
+          min="0"
+          max="255"
+          v-model="colorValues.red"
+        />
+      </div>
+      <div class="color-slider-wrapper">
+        <label style="color: green"
+          >Green: <input type="text" v-model="colorValues.green" /></label
+        ><input
+          class="form-range"
+          name="green"
+          id="green"
+          type="range"
+          min="0"
+          max="255"
+          v-model="colorValues.green"
+        />
+      </div>
+      <div class="color-slider-wrapper">
+        <label style="color: blue"
+          >Blue: <input type="text" v-model="colorValues.blue" /></label
+        ><input
+          class="form-range"
+          name="blue"
+          id="blue"
+          type="range"
+          min="0"
+          max="255"
+          v-model="colorValues.blue"
+        />
+      </div>
+      <div class="color-legend-wrapper" :style="generatedRGBStyle">
+        <span class="color-legend"
+          >色の見本:RGB({{colorValues.red}},
+          {{colorValues.green}},
+          {{colorValues.blue}})</span
+        >
+        <!-- <span>hex: #{{Number(colorValues.red).toString(16)}}{{Number(colorValues.green).toString(16)}}{{Number(colorValues.blue).toString(16)}}</span> -->
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      Vue.createApp({
+        setup() {
+          const colorValues = Vue.ref({
+            red: 100,
+            green: 100,
+            blue: 100,
+          });
+          const generatedRGBStyle = Vue.computed(() => {
+            return `background: rgb(${colorValues.value.red}, ${colorValues.value.green}, ${colorValues.value.blue})`;
+          });
+          return {
+            colorValues,
+            generatedRGBStyle,
+          };
+        },
+      }).mount("#app");
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
