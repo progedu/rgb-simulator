@@ -19,7 +19,8 @@
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        padding: 20px;
+        padding: 40px;
+        display: inline-block;
     }
     
     .color-legend {
@@ -43,6 +44,10 @@
     input[type="text"]::placeholder {
         color: #ccc;
     }
+    
+    span {
+        display: inline-block;
+    }
 </style>
 </head>
 
@@ -53,7 +58,7 @@
     <script>
         function getValue() {
             try {
-                let a = document.getElementById("t1").value;
+                let a = document.getElementById("hexinput").value;
                 let regex = new RegExp(/([a-fA-F0-9]{3}|[a-fA-F0-9]{6})/);
                 if (regex.test(a)) {
                     document.getElementById('color-legend-wrapper').style.backgroundColor = '#' + a;
@@ -63,21 +68,21 @@
             } catch (e) {
                 document.getElementById('color-legend-wrapper').style.backgroundColor = 'transparent';
             }
-            var $hexcode = document.getElementById("t1").value;
+            var $hexcode = document.getElementById("hexinput").value;
             document.getElementById("hexoutput").innerHTML = $hexcode;
         }
 
         function del() {
-            document.getElementById("t1").value = '';
+            document.getElementById("hexinput").value = '';
             document.getElementById('color-legend-wrapper').style.backgroundColor = 'transparent';
-            document.getElementById("t1").focus();
+            document.getElementById("hexinput").focus();
         }
     </script>
     <div id="app" class="container mt-5">
         <h2>16進数で入力してみよう</h2>
         <br>
         <div>
-            <span class="hash">#</span> <input type="text" id="t1" onkeyup="getValue();">
+            <span class="hash">#</span> <input type="text" id="hexinput" onkeyup="getValue();">
             <input type="button" id="btn1" value="クリア" onclick="del();">
             <br>
             <br>
